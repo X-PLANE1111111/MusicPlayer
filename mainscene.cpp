@@ -328,15 +328,21 @@ void MainScene::ListWidgetClicked(const QModelIndex &)
 {
     qDebug() << "currect Row:" << this->listWidget->currentRow();
     
+    disconnect(this->playList, &QMediaPlaylist::currentIndexChanged, this, &MainScene::OnMediaPlayListIndexChanged); 
+    
     this->playList->setCurrentIndex(this->listWidget->currentRow());
     this->listWidget->setCurrentRow(this->listWidget->currentRow());
     
     qDebug() << "currect index for play list:" << playList->currentIndex();
     qDebug() << "how many media in play list:" << playList->mediaCount();
+    
+    connect(this->playList, &QMediaPlaylist::currentIndexChanged, this, &MainScene::OnMediaPlayListIndexChanged); 
 }
 
 void MainScene::OnMediaPlayListIndexChanged()
 {
+    qDebug() << "triggered OnMediaPlayListIndexChanged";
+    
     int currentRow = this->listWidget->currentRow();
     
     if(++currentRow == playList->mediaCount())
