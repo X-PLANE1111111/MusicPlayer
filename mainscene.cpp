@@ -237,7 +237,9 @@ void MainScene::PlayMusic()
 void MainScene::LoadMusic()
 {
     QFile file(FILENAME);
-    file.open(QFile::ReadOnly);
+    bool isOpen = file.open(QFile::ReadOnly);
+    if(!isOpen)
+        qDebug() << "Open json file failed!";
     
     QString str = file.readAll();
     qDebug() << str.toUtf8().data();
