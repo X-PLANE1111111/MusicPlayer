@@ -199,12 +199,40 @@
      </size>
     </property>
    </widget>
+   <widget class="QPushButton" name="pushButton_next">
+    <property name="geometry">
+     <rect>
+      <x>90</x>
+      <y>510</y>
+      <width>40</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_previous">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>510</y>
+      <width>40</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
    <zorder>pushButton_pause</zorder>
    <zorder>pushButton_addMusic</zorder>
    <zorder>pushButton_pauseMusic</zorder>
    <zorder>label</zorder>
    <zorder>widget</zorder>
    <zorder>widget_2</zorder>
+   <zorder>pushButton_next</zorder>
+   <zorder>pushButton_previous</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">

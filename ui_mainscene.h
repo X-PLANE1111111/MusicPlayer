@@ -42,6 +42,8 @@ public:
     QLabel *label_3;
     QSlider *horizontalSlider_progressBar;
     QPushButton *pushButton_pause;
+    QPushButton *pushButton_next;
+    QPushButton *pushButton_previous;
     QMenuBar *menubar;
     QMenu *menuStart;
 
@@ -134,6 +136,12 @@ public:
         icon1.addFile(QStringLiteral(":/Images/Pause.png"), QSize(), QIcon::Normal, QIcon::Off);
         pushButton_pause->setIcon(icon1);
         pushButton_pause->setIconSize(QSize(50, 50));
+        pushButton_next = new QPushButton(centralwidget);
+        pushButton_next->setObjectName(QStringLiteral("pushButton_next"));
+        pushButton_next->setGeometry(QRect(90, 510, 40, 30));
+        pushButton_previous = new QPushButton(centralwidget);
+        pushButton_previous->setObjectName(QStringLiteral("pushButton_previous"));
+        pushButton_previous->setGeometry(QRect(10, 510, 40, 30));
         MainScene->setCentralWidget(centralwidget);
         pushButton_pause->raise();
         pushButton_addMusic->raise();
@@ -141,6 +149,8 @@ public:
         label->raise();
         widget->raise();
         widget_2->raise();
+        pushButton_next->raise();
+        pushButton_previous->raise();
         menubar = new QMenuBar(MainScene);
         menubar->setObjectName(QStringLiteral("menubar"));
         menubar->setGeometry(QRect(0, 0, 800, 22));
@@ -166,6 +176,8 @@ public:
         label_2->setText(QApplication::translate("MainScene", "Volume", Q_NULLPTR));
         label_3->setText(QApplication::translate("MainScene", "Progress Bar", Q_NULLPTR));
         pushButton_pause->setText(QString());
+        pushButton_next->setText(QString());
+        pushButton_previous->setText(QString());
         menuStart->setTitle(QApplication::translate("MainScene", "Start", Q_NULLPTR));
     } // retranslateUi
 

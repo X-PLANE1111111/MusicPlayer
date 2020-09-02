@@ -68,6 +68,12 @@ private:
     //pause music
     void PauseMusic();
     
+    //previous music
+    void PreviousMusic();
+    
+    //next music
+    void NextMusic();
+    
     //the container that saves title and path
     QVector<QPair<QString, QString>>titleAndPath; 
     

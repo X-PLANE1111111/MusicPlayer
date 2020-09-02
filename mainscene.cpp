@@ -89,6 +89,12 @@ MainScene::MainScene(QWidget *parent)
     //connect the slider for media player
     connect(ui->horizontalSlider_progressBar, &QSlider::valueChanged, player, &QMediaPlayer::setPosition);
     
+    
+    //previous and next music button
+    connect(ui->pushButton_previous, &QPushButton::clicked, this, &MainScene::PreviousMusic);
+    connect(ui->pushButton_next, &QPushButton::clicked, this, &MainScene::NextMusic);
+    
+    
     //    QString listWidgetStyle = "QScrollBar:vertical"
     //                              "{"
     //                              "width:8px;"
@@ -396,4 +402,26 @@ void MainScene::PauseMusic()
     player->pause();
     ui->pushButton_pause->hide();
     ui->pushButton_pauseMusic->show();
+}
+
+void MainScene::PreviousMusic()
+{
+    int currentRow = this->listWidget->currentRow();
+    
+    if(--currentRow == -1)
+        currentRow = this->listWidget->count() - 1;
+    
+    this->playList->setCurrentIndex(currentRow);
+    this->listWidget->setCurrentRow(currentRow);
+}
+
+void MainScene::NextMusic()
+{
+    int currentRow = this->listWidget->currentRow();
+    
+    if(++currentRow == this->listWidget->count())
+        currentRow = 0;
+    
+    this->playList->setCurrentIndex(currentRow);
+    this->listWidget->setCurrentRow(currentRow);
 }
