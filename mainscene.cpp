@@ -186,14 +186,14 @@ void MainScene::AddMusic()
         qDebug() << "file path =" << addMusicWidget->filePath;
         qDebug() << "title =" << addMusicWidget->title;
         
-        //add media and list widget
-        this->playList->addMedia(QUrl::fromLocalFile(addMusicWidget->filePath));
-        QListWidgetItem *item = new QListWidgetItem(addMusicWidget->title);
-        this->listWidget->addItem(item);
-        
         QString realTitle = addMusicWidget->title;
         realTitle += " - ";
         realTitle += addMusicWidget->artist;
+        
+        //add media and list widget
+        this->playList->addMedia(QUrl::fromLocalFile(addMusicWidget->filePath));
+        QListWidgetItem *item = new QListWidgetItem(realTitle);
+        this->listWidget->addItem(item);
         
         //add this filepath to the container
         titleAndPath.push_back(qMakePair(realTitle, addMusicWidget->filePath));
@@ -219,16 +219,19 @@ void MainScene::SaveMusic()
     {
         writer.StartObject();
         
-        int pos = it->first.indexOf('c');
+        int pos = it->first.indexOf('-');
         
-        QString title = it->first.mid(0, pos - 2);
-        
+        QString title = it->first.mid(0, pos - 1);
         qDebug() << title;
         
-        QString artist;
+        QString artist = it->first.mid(pos + 2, it->first.size());
+        qDebug() << artist;
         
         writer.Key("title");
-        writer.String(it->first.toUtf8().data());
+        writer.String(title.toUtf8().data());
+        
+        writer.Key("artist");
+        writer.String(artist.toUtf8().data());
         
         writer.Key("path");
         writer.String(it->second.toUtf8().data());
@@ -285,10 +288,21 @@ void MainScene::LoadMusic()
                     const char *title = "";
                     const char *path = "";
                     
+                    QString realTitle;
+                    
                     if(object.HasMember("title") && object["title"].IsString())
                     {
                         title = object["title"].GetString();
+                        realTitle = title;
                         qDebug() << object["title"].GetString();
+                    }
+                    
+                    if(object.HasMember("artist") && object["artist"].IsString())
+                    {
+                        realTitle += " - ";
+                        title = object["artist"].GetString();
+                        realTitle += title;
+                        qDebug() << realTitle;
                     }
                     
                     if(object.HasMember("path") && object["path"].IsString())
@@ -297,7 +311,7 @@ void MainScene::LoadMusic()
                         qDebug() << object["path"].GetString();
                     }
                     
-                    titleAndPath.push_back(qMakePair((QString)title, (QString)path));
+                    titleAndPath.push_back(qMakePair(realTitle, (QString)path));
                     qDebug() << "first =" << titleAndPath[i].first;
                     qDebug() << "second =" << titleAndPath[i].second;
                 }
