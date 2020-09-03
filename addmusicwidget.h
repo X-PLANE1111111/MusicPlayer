@@ -17,9 +17,13 @@ public:
     
     QString title;
     QString filePath;
+    QString artist;
     
     void SetTitle(QString title);
     void SetPath(QString path);
+    void SetArtist(QString artist);
+    
+    bool eventFilter(QObject *o, QEvent *e);
    
 signals:
     void FinishedAddingMusic();

@@ -191,8 +191,12 @@ void MainScene::AddMusic()
         QListWidgetItem *item = new QListWidgetItem(addMusicWidget->title);
         this->listWidget->addItem(item);
         
+        QString realTitle = addMusicWidget->title;
+        realTitle += " - ";
+        realTitle += addMusicWidget->artist;
+        
         //add this filepath to the container
-        titleAndPath.push_back(qMakePair(addMusicWidget->title, addMusicWidget->filePath));
+        titleAndPath.push_back(qMakePair(realTitle, addMusicWidget->filePath));
         
         //save the music into json file
         this->SaveMusic();
@@ -214,6 +218,14 @@ void MainScene::SaveMusic()
     for(auto it = this->titleAndPath.begin(); it != this->titleAndPath.end(); it++)
     {
         writer.StartObject();
+        
+        int pos = it->first.indexOf('c');
+        
+        QString title = it->first.mid(0, pos - 2);
+        
+        qDebug() << title;
+        
+        QString artist;
         
         writer.Key("title");
         writer.String(it->first.toUtf8().data());
