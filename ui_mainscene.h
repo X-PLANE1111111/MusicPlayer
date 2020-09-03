@@ -58,7 +58,7 @@ public:
         centralwidget->setObjectName(QStringLiteral("centralwidget"));
         pushButton_addMusic = new QPushButton(centralwidget);
         pushButton_addMusic->setObjectName(QStringLiteral("pushButton_addMusic"));
-        pushButton_addMusic->setGeometry(QRect(710, 520, 80, 20));
+        pushButton_addMusic->setGeometry(QRect(710, 510, 80, 20));
         pushButton_addMusic->setCursor(QCursor(Qt::PointingHandCursor));
         pushButton_addMusic->setStyleSheet(QLatin1String("QPushButton\n"
 "{\n"
@@ -68,13 +68,13 @@ public:
 "}"));
         pushButton_pauseMusic = new QPushButton(centralwidget);
         pushButton_pauseMusic->setObjectName(QStringLiteral("pushButton_pauseMusic"));
-        pushButton_pauseMusic->setGeometry(QRect(50, 510, 40, 30));
+        pushButton_pauseMusic->setGeometry(QRect(53, 510, 40, 30));
         pushButton_pauseMusic->setCursor(QCursor(Qt::PointingHandCursor));
         pushButton_pauseMusic->setStyleSheet(QStringLiteral("QPushButton{border:0px}"));
         QIcon icon;
         icon.addFile(QStringLiteral(":/Images/Resume.png"), QSize(), QIcon::Normal, QIcon::Off);
         pushButton_pauseMusic->setIcon(icon);
-        pushButton_pauseMusic->setIconSize(QSize(50, 50));
+        pushButton_pauseMusic->setIconSize(QSize(40, 40));
         label = new QLabel(centralwidget);
         label->setObjectName(QStringLiteral("label"));
         label->setGeometry(QRect(0, 0, 261, 31));
@@ -87,7 +87,7 @@ public:
         label->setAlignment(Qt::AlignCenter);
         widget = new QWidget(centralwidget);
         widget->setObjectName(QStringLiteral("widget"));
-        widget->setGeometry(QRect(560, 490, 131, 58));
+        widget->setGeometry(QRect(560, 485, 131, 58));
         verticalLayout = new QVBoxLayout(widget);
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         label_2 = new QLabel(widget);
@@ -109,7 +109,7 @@ public:
 
         widget_2 = new QWidget(centralwidget);
         widget_2->setObjectName(QStringLiteral("widget_2"));
-        widget_2->setGeometry(QRect(150, 490, 401, 58));
+        widget_2->setGeometry(QRect(140, 485, 401, 58));
         verticalLayout_2 = new QVBoxLayout(widget_2);
         verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
         label_3 = new QLabel(widget_2);
@@ -129,19 +129,34 @@ public:
 
         pushButton_pause = new QPushButton(centralwidget);
         pushButton_pause->setObjectName(QStringLiteral("pushButton_pause"));
-        pushButton_pause->setGeometry(QRect(50, 510, 40, 30));
+        pushButton_pause->setGeometry(QRect(53, 510, 40, 30));
         pushButton_pause->setCursor(QCursor(Qt::PointingHandCursor));
         pushButton_pause->setStyleSheet(QStringLiteral("QPushButton{border:0px}"));
         QIcon icon1;
         icon1.addFile(QStringLiteral(":/Images/Pause.png"), QSize(), QIcon::Normal, QIcon::Off);
         pushButton_pause->setIcon(icon1);
-        pushButton_pause->setIconSize(QSize(50, 50));
+        pushButton_pause->setIconSize(QSize(40, 40));
         pushButton_next = new QPushButton(centralwidget);
         pushButton_next->setObjectName(QStringLiteral("pushButton_next"));
-        pushButton_next->setGeometry(QRect(90, 510, 40, 30));
+        pushButton_next->setGeometry(QRect(100, 510, 40, 30));
+        pushButton_next->setCursor(QCursor(Qt::PointingHandCursor));
+        pushButton_next->setStyleSheet(QStringLiteral("QPushButton{border:0px}"));
+        QIcon icon2;
+        icon2.addFile(QStringLiteral(":/Images/next.png"), QSize(), QIcon::Normal, QIcon::Off);
+        pushButton_next->setIcon(icon2);
+        pushButton_next->setIconSize(QSize(40, 40));
         pushButton_previous = new QPushButton(centralwidget);
         pushButton_previous->setObjectName(QStringLiteral("pushButton_previous"));
         pushButton_previous->setGeometry(QRect(10, 510, 40, 30));
+        pushButton_previous->setCursor(QCursor(Qt::PointingHandCursor));
+        pushButton_previous->setStyleSheet(QLatin1String("QPushButton\n"
+"{\n"
+"	border:0px;\n"
+"}"));
+        QIcon icon3;
+        icon3.addFile(QStringLiteral(":/Images/Previous.png"), QSize(), QIcon::Normal, QIcon::Off);
+        pushButton_previous->setIcon(icon3);
+        pushButton_previous->setIconSize(QSize(40, 40));
         MainScene->setCentralWidget(centralwidget);
         pushButton_pause->raise();
         pushButton_addMusic->raise();

@@ -35,7 +35,7 @@ MainScene::MainScene(QWidget *parent)
     
     //init list widget
     this->listWidget = new MyListWidget(this);
-    this->listWidget->setGeometry(0, 30, 260, 480);
+    this->listWidget->setGeometry(0, 60, 260, 460);
     
     
     //init pause and resume button

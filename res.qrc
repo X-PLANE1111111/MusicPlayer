@@ -2,5 +2,7 @@
     <qresource prefix="/">
         <file>Images/Resume.png</file>
         <file>Images/Pause.png</file>
+        <file>Images/Previous.png</file>
+        <file>Images/next.png</file>
     </qresource>
 </RCC>
