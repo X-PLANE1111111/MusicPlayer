@@ -44,7 +44,14 @@
     </widget>
    </item>
    <item>
-    <widget class="QLineEdit" name="lineEdit_title"/>
+    <widget class="QLineEdit" name="lineEdit_title">
+     <property name="font">
+      <font>
+       <family>Consolas</family>
+       <pointsize>10</pointsize>
+      </font>
+     </property>
+    </widget>
    </item>
    <item>
     <widget class="QLabel" name="label_2">
@@ -85,10 +92,41 @@
        <number>0</number>
       </property>
       <item>
-       <widget class="QLineEdit" name="lineEdit_musicPath"/>
+       <widget class="QLineEdit" name="lineEdit_musicPath">
+        <property name="font">
+         <font>
+          <family>Consolas</family>
+          <pointsize>10</pointsize>
+         </font>
+        </property>
+       </widget>
       </item>
       <item>
        <widget class="QPushButton" name="pushButton_openFileDialog">
+        <property name="styleSheet">
+         <string notr="true">QPushButton
+{
+	background-color: rgb(225, 225, 225);
+    border-style: outset;
+    border-width: 0px;
+    border-radius: 12px;
+    border-color: beige;
+	font: 10pt &quot;Consolas&quot;;
+    padding: 6px;
+}
+
+QPushButton:hover
+{
+	background-color: rgb(0, 170, 255);
+	border-color: rgb(0, 255, 255);
+}
+
+QPushButton:pressed 
+{
+	background-color: rgb(0, 129, 193);
+    border-style: inset;
+}</string>
+        </property>
         <property name="text">
          <string>Open Directionary</string>
         </property>
@@ -112,6 +150,26 @@
    </item>
    <item>
     <widget class="QPushButton" name="pushButton_confirm">
+     <property name="styleSheet">
+      <string notr="true">QPushButton
+{
+	background-color: rgb(173, 173, 173);
+	border-radius: 12px;
+	font: 10pt &quot;Consolas&quot;;
+	border-width: 2px;
+	padding: 2px;
+}
+
+QPushButton:hover
+{
+	background-color: rgb(1, 132, 255);
+}
+
+QPushButton:pressed
+{
+	background-color: rgb(1, 132, 200);
+}</string>
+     </property>
      <property name="text">
       <string>Confirm</string>
      </property>

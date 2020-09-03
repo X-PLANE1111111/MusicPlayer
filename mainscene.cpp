@@ -24,6 +24,9 @@ MainScene::MainScene(QWidget *parent)
 {
     ui->setupUi(this);
     
+    //set fixed size
+    this->setFixedSize(800, 570);
+    
     //init player
     this->playList = new QMediaPlaylist(this);
     player = new QMediaPlayer(this);
@@ -400,6 +403,9 @@ void MainScene::EditMusic(int row)
         
         //delete the addMusicWidget
         delete addMusicWidget;
+        
+        this->playList->setCurrentIndex(row);
+        this->listWidget->setCurrentRow(row);
     });
 }
 

@@ -63,6 +63,10 @@ public:
 
         lineEdit_title = new QLineEdit(AddMusicWidget);
         lineEdit_title->setObjectName(QStringLiteral("lineEdit_title"));
+        QFont font;
+        font.setFamily(QStringLiteral("Consolas"));
+        font.setPointSize(10);
+        lineEdit_title->setFont(font);
 
         verticalLayout->addWidget(lineEdit_title);
 
@@ -86,11 +90,34 @@ public:
         horizontalLayout->setContentsMargins(0, 0, 0, 0);
         lineEdit_musicPath = new QLineEdit(frame);
         lineEdit_musicPath->setObjectName(QStringLiteral("lineEdit_musicPath"));
+        lineEdit_musicPath->setFont(font);
 
         horizontalLayout->addWidget(lineEdit_musicPath);
 
         pushButton_openFileDialog = new QPushButton(frame);
         pushButton_openFileDialog->setObjectName(QStringLiteral("pushButton_openFileDialog"));
+        pushButton_openFileDialog->setStyleSheet(QLatin1String("QPushButton\n"
+"{\n"
+"	background-color: rgb(225, 225, 225);\n"
+"    border-style: outset;\n"
+"    border-width: 0px;\n"
+"    border-radius: 12px;\n"
+"    border-color: beige;\n"
+"	font: 10pt \"Consolas\";\n"
+"    padding: 6px;\n"
+"}\n"
+"\n"
+"QPushButton:hover\n"
+"{\n"
+"	background-color: rgb(0, 170, 255);\n"
+"	border-color: rgb(0, 255, 255);\n"
+"}\n"
+"\n"
+"QPushButton:pressed \n"
+"{\n"
+"	background-color: rgb(0, 129, 193);\n"
+"    border-style: inset;\n"
+"}"));
 
         horizontalLayout->addWidget(pushButton_openFileDialog);
 
@@ -103,6 +130,24 @@ public:
 
         pushButton_confirm = new QPushButton(AddMusicWidget);
         pushButton_confirm->setObjectName(QStringLiteral("pushButton_confirm"));
+        pushButton_confirm->setStyleSheet(QLatin1String("QPushButton\n"
+"{\n"
+"	background-color: rgb(173, 173, 173);\n"
+"	border-radius: 12px;\n"
+"	font: 10pt \"Consolas\";\n"
+"	border-width: 2px;\n"
+"	padding: 2px;\n"
+"}\n"
+"\n"
+"QPushButton:hover\n"
+"{\n"
+"	background-color: rgb(1, 132, 255);\n"
+"}\n"
+"\n"
+"QPushButton:pressed\n"
+"{\n"
+"	background-color: rgb(1, 132, 200);\n"
+"}"));
 
         verticalLayout->addWidget(pushButton_confirm);
 

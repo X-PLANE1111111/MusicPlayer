@@ -51,7 +51,7 @@ public:
     {
         if (MainScene->objectName().isEmpty())
             MainScene->setObjectName(QStringLiteral("MainScene"));
-        MainScene->resize(800, 571);
+        MainScene->resize(800, 570);
         actionAdd_Music = new QAction(MainScene);
         actionAdd_Music->setObjectName(QStringLiteral("actionAdd_Music"));
         centralwidget = new QWidget(MainScene);
@@ -65,6 +65,17 @@ public:
 "	border-radius:6px;\n"
 "	background-color: rgb(0, 170, 255);\n"
 "	font: 10pt \"Consolas\";\n"
+"}\n"
+"\n"
+"QPushButton:pressed\n"
+"{\n"
+"	background-color: rgb(0, 143, 214);\n"
+"	border-style: inset;\n"
+"}\n"
+"\n"
+"QPushButton:hover\n"
+"{\n"
+"	color: rgb(0, 255, 255);\n"
 "}"));
         pushButton_pauseMusic = new QPushButton(centralwidget);
         pushButton_pauseMusic->setObjectName(QStringLiteral("pushButton_pauseMusic"));
@@ -109,7 +120,7 @@ public:
 
         widget_2 = new QWidget(centralwidget);
         widget_2->setObjectName(QStringLiteral("widget_2"));
-        widget_2->setGeometry(QRect(140, 485, 401, 58));
+        widget_2->setGeometry(QRect(150, 485, 401, 58));
         verticalLayout_2 = new QVBoxLayout(widget_2);
         verticalLayout_2->setObjectName(QStringLiteral("verticalLayout_2"));
         label_3 = new QLabel(widget_2);
