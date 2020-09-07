@@ -17,17 +17,20 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     addmusicwidget.cpp \
+    hotkeys.cpp \
     main.cpp \
     mainscene.cpp \
     mylistwidget.cpp
 
 HEADERS += \
     addmusicwidget.h \
+    hotkeys.h \
     mainscene.h \
     mylistwidget.h
 
 FORMS += \
     addmusicwidget.ui \
+    hotkeys.ui \
     mainscene.ui
 
 # Default rules for deployment.

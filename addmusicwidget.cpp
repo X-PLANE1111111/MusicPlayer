@@ -93,6 +93,20 @@ bool AddMusicWidget::eventFilter(QObject *o, QEvent *e)
             return ui->lineEdit_title->eventFilter(o, e);
         }
     }
+    if(o == ui->lineEdit_artist)
+    {
+        if(e->type() == QEvent::KeyPress)
+        {
+            QKeyEvent *keyEvent = (QKeyEvent*)e;
+            switch(keyEvent->key())
+            {
+            case Qt::Key_Minus:
+                return true;
+            }
+            
+            return ui->lineEdit_title->eventFilter(o, e);
+        }
+    }
     
     return QObject::eventFilter(o, e);
 }

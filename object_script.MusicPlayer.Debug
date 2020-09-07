@@ -1,0 +1,12 @@
+INPUT(
+./debug\addmusicwidget.o
+./debug\hotkeys.o
+./debug\main.o
+./debug\mainscene.o
+./debug\mylistwidget.o
+./debug\qrc_res.o
+./debug\moc_addmusicwidget.o
+./debug\moc_hotkeys.o
+./debug\moc_mainscene.o
+./debug\moc_mylistwidget.o
+);

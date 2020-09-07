@@ -4,10 +4,12 @@
 #include "rapidjson/stringbuffer.h"
 #include "rapidjson/writer.h"
 #include "rapidjson/document.h"
+#include "hotkeys.h"
 
 #include <QFileDialog>
 #include <fstream>
 #include <string>
+#include <QKeyEvent>
 
 using std::ifstream;
 using std::ofstream;
@@ -32,6 +34,10 @@ MainScene::MainScene(QWidget *parent)
     player = new QMediaPlayer(this);
     player->setPlaylist(this->playList);
     
+    //set hot keys for Pause Button and Resume Button
+    ui->pushButton_pause->setShortcut(QKeySequence("Space"));
+    ui->pushButton_pauseMusic->setShortcut(QKeySequence("Space"));
+    
     //set volume
     ui->horizontalSlider_setVolume->setValue(50);
     player->setVolume(50);
@@ -39,6 +45,10 @@ MainScene::MainScene(QWidget *parent)
     //init list widget
     this->listWidget = new MyListWidget(this);
     this->listWidget->setGeometry(0, 60, 260, 460);
+    
+    //init play back mode button
+    ui->pushButton_loop1Song->hide();
+    ui->pushButton_randomMode->hide();
     
     
     //init pause and resume button
@@ -57,6 +67,28 @@ MainScene::MainScene(QWidget *parent)
     
     //edit music
     connect(this->listWidget, &MyListWidget::EditMusic, this, &MainScene::EditMusic);
+    
+    //connect these play back mode button
+    connect(ui->pushButton_loopMode, &QPushButton::clicked, [=]()
+    {
+        ui->pushButton_loop1Song->show();
+        ui->pushButton_loopMode->hide();
+        playList->setPlaybackMode(QMediaPlaylist::CurrentItemInLoop);
+    });
+    
+    connect(ui->pushButton_loop1Song, &QPushButton::clicked, [=]()
+    {
+        ui->pushButton_randomMode->show();
+        ui->pushButton_loop1Song->hide();
+        playList->setPlaybackMode(QMediaPlaylist::Random);
+    });
+    
+    connect(ui->pushButton_randomMode, &QPushButton::clicked, [=]()
+    {
+        ui->pushButton_loopMode->show();
+        ui->pushButton_randomMode->hide();
+        playList->setPlaybackMode(QMediaPlaylist::Loop);
+    });
     
     
     
@@ -168,6 +200,13 @@ MainScene::MainScene(QWidget *parent)
     
     //connect add music button in the menu bar
     connect(ui->actionAdd_Music, &QAction::triggered, this, &MainScene::AddMusic);
+    
+    HotKeys *hotKeysScene = new HotKeys;
+    hotKeysScene->resize(300, 200);
+    hotKeysScene->setWindowTitle("Hot Keys");
+    
+    //connect hot keys action
+    connect(ui->actionHotKeys, &QAction::triggered, hotKeysScene, &HotKeys::show);
 }
 
 MainScene::~MainScene()
@@ -372,10 +411,7 @@ void MainScene::OnMediaPlayListIndexChanged()
 {
     qDebug() << "triggered OnMediaPlayListIndexChanged";
     
-    int currentRow = this->listWidget->currentRow();
-    
-    if(++currentRow == playList->mediaCount())
-        currentRow = 0;
+    int currentRow = this->playList->currentIndex();
     
     this->listWidget->setCurrentRow(currentRow);
 }

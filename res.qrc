@@ -4,5 +4,8 @@
         <file>Images/Pause.png</file>
         <file>Images/Previous.png</file>
         <file>Images/next.png</file>
+        <file>Images/Random.png</file>
+        <file>Images/Loop.png</file>
+        <file>Images/Loop1Song.png</file>
     </qresource>
 </RCC>

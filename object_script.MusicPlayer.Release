@@ -1,0 +1,12 @@
+INPUT(
+./release\addmusicwidget.o
+./release\hotkeys.o
+./release\main.o
+./release\mainscene.o
+./release\mylistwidget.o
+./release\qrc_res.o
+./release\moc_addmusicwidget.o
+./release\moc_hotkeys.o
+./release\moc_mainscene.o
+./release\moc_mylistwidget.o
+);

@@ -2,6 +2,9 @@
 <ui version="4.0">
  <class>MainScene</class>
  <widget class="QMainWindow" name="MainScene">
+  <property name="enabled">
+   <bool>true</bool>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -18,13 +21,13 @@
     <property name="geometry">
      <rect>
       <x>710</x>
-      <y>510</y>
+      <y>10</y>
       <width>80</width>
       <height>20</height>
      </rect>
     </property>
     <property name="cursor">
-     <cursorShape>PointingHandCursor</cursorShape>
+     <cursorShape>ArrowCursor</cursorShape>
     </property>
     <property name="styleSheet">
      <string notr="true">QPushButton
@@ -59,7 +62,10 @@ QPushButton:hover
      </rect>
     </property>
     <property name="cursor">
-     <cursorShape>PointingHandCursor</cursorShape>
+     <cursorShape>ArrowCursor</cursorShape>
+    </property>
+    <property name="toolTip">
+     <string>Resume</string>
     </property>
     <property name="styleSheet">
      <string notr="true">QPushButton{border:0px}</string>
@@ -105,9 +111,9 @@ QPushButton:hover
    <widget class="QWidget" name="widget" native="true">
     <property name="geometry">
      <rect>
-      <x>560</x>
+      <x>540</x>
       <y>485</y>
-      <width>131</width>
+      <width>121</width>
       <height>58</height>
      </rect>
     </property>
@@ -131,7 +137,7 @@ QPushButton:hover
      <item>
       <widget class="QSlider" name="horizontalSlider_setVolume">
        <property name="cursor">
-        <cursorShape>SizeHorCursor</cursorShape>
+        <cursorShape>ArrowCursor</cursorShape>
        </property>
        <property name="orientation">
         <enum>Qt::Horizontal</enum>
@@ -145,7 +151,7 @@ QPushButton:hover
      <rect>
       <x>150</x>
       <y>485</y>
-      <width>401</width>
+      <width>381</width>
       <height>58</height>
      </rect>
     </property>
@@ -172,7 +178,7 @@ QPushButton:hover
         <bool>false</bool>
        </property>
        <property name="cursor">
-        <cursorShape>SizeHorCursor</cursorShape>
+        <cursorShape>ArrowCursor</cursorShape>
        </property>
        <property name="orientation">
         <enum>Qt::Horizontal</enum>
@@ -191,7 +197,10 @@ QPushButton:hover
      </rect>
     </property>
     <property name="cursor">
-     <cursorShape>PointingHandCursor</cursorShape>
+     <cursorShape>ArrowCursor</cursorShape>
+    </property>
+    <property name="toolTip">
+     <string>Pause</string>
     </property>
     <property name="styleSheet">
      <string notr="true">QPushButton{border:0px}</string>
@@ -220,7 +229,7 @@ QPushButton:hover
      </rect>
     </property>
     <property name="cursor">
-     <cursorShape>PointingHandCursor</cursorShape>
+     <cursorShape>ArrowCursor</cursorShape>
     </property>
     <property name="styleSheet">
      <string notr="true">QPushButton{border:0px}</string>
@@ -234,9 +243,12 @@ QPushButton:hover
     </property>
     <property name="iconSize">
      <size>
-      <width>40</width>
-      <height>40</height>
+      <width>35</width>
+      <height>30</height>
      </size>
+    </property>
+    <property name="shortcut">
+     <string>Right</string>
     </property>
    </widget>
    <widget class="QPushButton" name="pushButton_previous">
@@ -249,7 +261,7 @@ QPushButton:hover
      </rect>
     </property>
     <property name="cursor">
-     <cursorShape>PointingHandCursor</cursorShape>
+     <cursorShape>ArrowCursor</cursorShape>
     </property>
     <property name="styleSheet">
      <string notr="true">QPushButton
@@ -266,8 +278,101 @@ QPushButton:hover
     </property>
     <property name="iconSize">
      <size>
-      <width>40</width>
+      <width>35</width>
       <height>40</height>
+     </size>
+    </property>
+    <property name="shortcut">
+     <string>Left</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_randomMode">
+    <property name="geometry">
+     <rect>
+      <x>680</x>
+      <y>510</y>
+      <width>30</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="toolTip">
+     <string>playing random songs in the play list</string>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton
+{
+	border:0px;
+}</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset resource="res.qrc">
+      <normaloff>:/Images/Random.png</normaloff>:/Images/Random.png</iconset>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>30</width>
+      <height>30</height>
+     </size>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_loopMode">
+    <property name="geometry">
+     <rect>
+      <x>680</x>
+      <y>510</y>
+      <width>30</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="toolTip">
+     <string>loop the song list</string>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton{border:0px;}</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset resource="res.qrc">
+      <normaloff>:/Images/Loop.png</normaloff>:/Images/Loop.png</iconset>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>30</width>
+      <height>30</height>
+     </size>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_loop1Song">
+    <property name="geometry">
+     <rect>
+      <x>680</x>
+      <y>510</y>
+      <width>30</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="toolTip">
+     <string>Loop the current song</string>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QPushButton{border:0px;}</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="icon">
+     <iconset resource="res.qrc">
+      <normaloff>:/Images/Loop1Song.png</normaloff>:/Images/Loop1Song.png</iconset>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>30</width>
+      <height>30</height>
      </size>
     </property>
    </widget>
@@ -279,6 +384,9 @@ QPushButton:hover
    <zorder>widget_2</zorder>
    <zorder>pushButton_next</zorder>
    <zorder>pushButton_previous</zorder>
+   <zorder>pushButton_randomMode</zorder>
+   <zorder>pushButton_loopMode</zorder>
+   <zorder>pushButton_loop1Song</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -294,12 +402,18 @@ QPushButton:hover
      <string>Start</string>
     </property>
     <addaction name="actionAdd_Music"/>
+    <addaction name="actionHotKeys"/>
    </widget>
    <addaction name="menuStart"/>
   </widget>
   <action name="actionAdd_Music">
    <property name="text">
     <string>Add Music</string>
+   </property>
+  </action>
+  <action name="actionHotKeys">
+   <property name="text">
+    <string>Hot Keys</string>
    </property>
   </action>
  </widget>
