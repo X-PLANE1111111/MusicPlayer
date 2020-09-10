@@ -5,6 +5,7 @@
 #include <QFileDialog>
 #include <QDebug>
 #include <QKeyEvent>
+#include <QMessageBox>
 
 AddMusicWidget::AddMusicWidget(QWidget *parent) :
     QWidget(parent),
@@ -18,6 +19,7 @@ AddMusicWidget::AddMusicWidget(QWidget *parent) :
     ui->label_noArtist->hide();
     ui->lineEdit_musicPath->setReadOnly(true);
     ui->lineEdit_title->installEventFilter(this);
+    ui->lineEdit_artist->installEventFilter(this);
     
     ui->label_noPath->setPalette(QPalette(QPalette::WindowText, Qt::red));
     ui->label_noTitle->setPalette(QPalette(QPalette::WindowText, Qt::red));
@@ -39,16 +41,9 @@ AddMusicWidget::AddMusicWidget(QWidget *parent) :
         ui->label_noPath->hide();
         ui->label_noTitle->hide();
         
-        if(ui->lineEdit_title->text() == "" || ui->lineEdit_musicPath->text() == "" || ui->lineEdit_artist->text() == "")
+        if(ui->lineEdit_musicPath->text() == "")
         {
-            if(ui->lineEdit_title->text() == "")
-                ui->label_noTitle->show();
-            
-            if(ui->lineEdit_musicPath->text() == "")
-                ui->label_noPath->show();
-            
-            if(ui->lineEdit_artist->text() == "")
-                ui->label_noArtist->show();
+            ui->label_noPath->show();
             
             return;
         }
@@ -87,13 +82,14 @@ bool AddMusicWidget::eventFilter(QObject *o, QEvent *e)
             switch(keyEvent->key())
             {
             case Qt::Key_Minus:
+                QMessageBox::warning(this, "waring", "title cannot include character \"-\"!");
                 return true;
             }
             
             return ui->lineEdit_title->eventFilter(o, e);
         }
     }
-    if(o == ui->lineEdit_artist)
+    else if(o == ui->lineEdit_artist)
     {
         if(e->type() == QEvent::KeyPress)
         {
@@ -101,10 +97,11 @@ bool AddMusicWidget::eventFilter(QObject *o, QEvent *e)
             switch(keyEvent->key())
             {
             case Qt::Key_Minus:
+                QMessageBox::warning(this, "waring", "artist cannot include character \"-\"!");
                 return true;
             }
             
-            return ui->lineEdit_title->eventFilter(o, e);
+            return ui->lineEdit_artist->eventFilter(o, e);
         }
     }
     

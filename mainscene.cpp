@@ -34,6 +34,13 @@ MainScene::MainScene(QWidget *parent)
     player = new QMediaPlayer(this);
     player->setPlaylist(this->playList);
     
+    //init list widget
+    this->listWidget = new MyListWidget(this);
+    this->listWidget->setGeometry(0, 60, 260, 460);
+    
+    //load music
+    this->LoadMusic();
+    
     //set hot keys for Pause Button and Resume Button
     ui->pushButton_pause->setShortcut(QKeySequence("Space"));
     ui->pushButton_pauseMusic->setShortcut(QKeySequence("Space"));
@@ -41,10 +48,6 @@ MainScene::MainScene(QWidget *parent)
     //set volume
     ui->horizontalSlider_setVolume->setValue(50);
     player->setVolume(50);
-    
-    //init list widget
-    this->listWidget = new MyListWidget(this);
-    this->listWidget->setGeometry(0, 60, 260, 460);
     
     //init play back mode button
     ui->pushButton_loop1Song->hide();
@@ -90,13 +93,11 @@ MainScene::MainScene(QWidget *parent)
         playList->setPlaybackMode(QMediaPlaylist::Loop);
     });
     
-    
-    
-    //load music
-    this->LoadMusic();
-    
     //add it into old file path
-    oldFilePath = this->titleAndPath[this->titleAndPath.size()-1].second;
+    if(this->titleAndPath.size() != 0)
+    {
+        oldFilePath = this->titleAndPath[this->titleAndPath.size()-1].second;
+    }
     
     //set playback mode
     this->playList->setPlaybackMode(QMediaPlaylist::Loop);
@@ -302,7 +303,10 @@ void MainScene::LoadMusic()
     QFile file(FILENAME);
     bool isOpen = file.open(QFile::ReadOnly);
     if(!isOpen)
+    {
         qDebug() << "Open json file failed!";
+        return;
+    }
     
     QString str = file.readAll();
     qDebug() << str.toUtf8().data();
@@ -358,13 +362,20 @@ void MainScene::LoadMusic()
         }
     }
     
+    int times = 0;
+    
     for(auto it = this->titleAndPath.begin(); it != this->titleAndPath.end(); it++)
     {
+        times++;
+        qDebug() << times;
+        
         qDebug() << "key = " << it->first;
         qDebug() << "value = " << it->second;
         
         QListWidgetItem *item = new QListWidgetItem(it->first);
         this->listWidget->addItem(item);
+        
+        qDebug() << "finished adding items to the list widget";
         
         this->playList->addMedia(QUrl::fromLocalFile(it->second));
     }

@@ -51,6 +51,9 @@ public:
         AddMusicWidget->resize(400, 250);
         AddMusicWidget->setMinimumSize(QSize(300, 180));
         AddMusicWidget->setMaximumSize(QSize(500, 250));
+        QIcon icon;
+        icon.addFile(QStringLiteral(":/Images/MusicIcon.png"), QSize(), QIcon::Normal, QIcon::Off);
+        AddMusicWidget->setWindowIcon(icon);
         verticalLayout = new QVBoxLayout(AddMusicWidget);
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
         label = new QLabel(AddMusicWidget);
@@ -86,6 +89,7 @@ public:
 
         lineEdit_artist = new QLineEdit(AddMusicWidget);
         lineEdit_artist->setObjectName(QStringLiteral("lineEdit_artist"));
+        lineEdit_artist->setFont(font);
 
         verticalLayout->addWidget(lineEdit_artist);
 

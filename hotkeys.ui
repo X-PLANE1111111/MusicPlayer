@@ -13,6 +13,10 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="res.qrc">
+    <normaloff>:/Images/MusicIcon.png</normaloff>:/Images/MusicIcon.png</iconset>
+  </property>
   <layout class="QHBoxLayout" name="horizontalLayout_4">
    <item>
     <widget class="QWidget" name="widget_4" native="true">
@@ -88,6 +92,8 @@
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="res.qrc"/>
+ </resources>
  <connections/>
 </ui>

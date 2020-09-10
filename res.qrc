@@ -7,5 +7,6 @@
         <file>Images/Random.png</file>
         <file>Images/Loop.png</file>
         <file>Images/Loop1Song.png</file>
+        <file>Images/MusicIcon.png</file>
     </qresource>
 </RCC>

@@ -46,6 +46,9 @@ public:
         if (HotKeys->objectName().isEmpty())
             HotKeys->setObjectName(QStringLiteral("HotKeys"));
         HotKeys->resize(400, 300);
+        QIcon icon;
+        icon.addFile(QStringLiteral(":/Images/MusicIcon.png"), QSize(), QIcon::Normal, QIcon::Off);
+        HotKeys->setWindowIcon(icon);
         horizontalLayout_4 = new QHBoxLayout(HotKeys);
         horizontalLayout_4->setObjectName(QStringLiteral("horizontalLayout_4"));
         widget_4 = new QWidget(HotKeys);

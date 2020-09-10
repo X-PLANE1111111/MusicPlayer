@@ -25,6 +25,10 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="res.qrc">
+    <normaloff>:/Images/MusicIcon.png</normaloff>:/Images/MusicIcon.png</iconset>
+  </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <widget class="QLabel" name="label">
@@ -71,7 +75,14 @@
     </widget>
    </item>
    <item>
-    <widget class="QLineEdit" name="lineEdit_artist"/>
+    <widget class="QLineEdit" name="lineEdit_artist">
+     <property name="font">
+      <font>
+       <family>Consolas</family>
+       <pointsize>10</pointsize>
+      </font>
+     </property>
+    </widget>
    </item>
    <item>
     <widget class="QLabel" name="label_2">
@@ -197,6 +208,8 @@ QPushButton:pressed
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="res.qrc"/>
+ </resources>
  <connections/>
 </ui>

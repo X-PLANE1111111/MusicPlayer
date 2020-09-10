@@ -13,8 +13,15 @@
     <height>570</height>
    </rect>
   </property>
+  <property name="cursor">
+   <cursorShape>ArrowCursor</cursorShape>
+  </property>
   <property name="windowTitle">
    <string>MainScene</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="res.qrc">
+    <normaloff>:/Images/MusicIcon.png</normaloff>:/Images/MusicIcon.png</iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QPushButton" name="pushButton_addMusic">
@@ -27,7 +34,7 @@
      </rect>
     </property>
     <property name="cursor">
-     <cursorShape>ArrowCursor</cursorShape>
+     <cursorShape>PointingHandCursor</cursorShape>
     </property>
     <property name="styleSheet">
      <string notr="true">QPushButton
@@ -62,7 +69,7 @@ QPushButton:hover
      </rect>
     </property>
     <property name="cursor">
-     <cursorShape>ArrowCursor</cursorShape>
+     <cursorShape>PointingHandCursor</cursorShape>
     </property>
     <property name="toolTip">
      <string>Resume</string>
@@ -197,7 +204,7 @@ QPushButton:hover
      </rect>
     </property>
     <property name="cursor">
-     <cursorShape>ArrowCursor</cursorShape>
+     <cursorShape>PointingHandCursor</cursorShape>
     </property>
     <property name="toolTip">
      <string>Pause</string>
@@ -229,7 +236,7 @@ QPushButton:hover
      </rect>
     </property>
     <property name="cursor">
-     <cursorShape>ArrowCursor</cursorShape>
+     <cursorShape>PointingHandCursor</cursorShape>
     </property>
     <property name="styleSheet">
      <string notr="true">QPushButton{border:0px}</string>
@@ -261,7 +268,7 @@ QPushButton:hover
      </rect>
     </property>
     <property name="cursor">
-     <cursorShape>ArrowCursor</cursorShape>
+     <cursorShape>PointingHandCursor</cursorShape>
     </property>
     <property name="styleSheet">
      <string notr="true">QPushButton
@@ -295,6 +302,9 @@ QPushButton:hover
       <height>30</height>
      </rect>
     </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
     <property name="toolTip">
      <string>playing random songs in the play list</string>
     </property>
@@ -327,6 +337,9 @@ QPushButton:hover
       <height>30</height>
      </rect>
     </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
     <property name="toolTip">
      <string>loop the song list</string>
     </property>
@@ -355,6 +368,9 @@ QPushButton:hover
       <width>30</width>
       <height>30</height>
      </rect>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
     </property>
     <property name="toolTip">
      <string>Loop the current song</string>

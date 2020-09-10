@@ -57,6 +57,10 @@ public:
             MainScene->setObjectName(QStringLiteral("MainScene"));
         MainScene->setEnabled(true);
         MainScene->resize(800, 570);
+        MainScene->setCursor(QCursor(Qt::ArrowCursor));
+        QIcon icon;
+        icon.addFile(QStringLiteral(":/Images/MusicIcon.png"), QSize(), QIcon::Normal, QIcon::Off);
+        MainScene->setWindowIcon(icon);
         actionAdd_Music = new QAction(MainScene);
         actionAdd_Music->setObjectName(QStringLiteral("actionAdd_Music"));
         actionHotKeys = new QAction(MainScene);
@@ -66,7 +70,7 @@ public:
         pushButton_addMusic = new QPushButton(centralwidget);
         pushButton_addMusic->setObjectName(QStringLiteral("pushButton_addMusic"));
         pushButton_addMusic->setGeometry(QRect(710, 10, 80, 20));
-        pushButton_addMusic->setCursor(QCursor(Qt::ArrowCursor));
+        pushButton_addMusic->setCursor(QCursor(Qt::PointingHandCursor));
         pushButton_addMusic->setStyleSheet(QLatin1String("QPushButton\n"
 "{\n"
 "	border-radius:6px;\n"
@@ -87,11 +91,11 @@ public:
         pushButton_pauseMusic = new QPushButton(centralwidget);
         pushButton_pauseMusic->setObjectName(QStringLiteral("pushButton_pauseMusic"));
         pushButton_pauseMusic->setGeometry(QRect(53, 510, 40, 30));
-        pushButton_pauseMusic->setCursor(QCursor(Qt::ArrowCursor));
+        pushButton_pauseMusic->setCursor(QCursor(Qt::PointingHandCursor));
         pushButton_pauseMusic->setStyleSheet(QStringLiteral("QPushButton{border:0px}"));
-        QIcon icon;
-        icon.addFile(QStringLiteral(":/Images/Resume.png"), QSize(), QIcon::Normal, QIcon::Off);
-        pushButton_pauseMusic->setIcon(icon);
+        QIcon icon1;
+        icon1.addFile(QStringLiteral(":/Images/Resume.png"), QSize(), QIcon::Normal, QIcon::Off);
+        pushButton_pauseMusic->setIcon(icon1);
         pushButton_pauseMusic->setIconSize(QSize(40, 40));
         label = new QLabel(centralwidget);
         label->setObjectName(QStringLiteral("label"));
@@ -148,59 +152,62 @@ public:
         pushButton_pause = new QPushButton(centralwidget);
         pushButton_pause->setObjectName(QStringLiteral("pushButton_pause"));
         pushButton_pause->setGeometry(QRect(53, 510, 40, 30));
-        pushButton_pause->setCursor(QCursor(Qt::ArrowCursor));
+        pushButton_pause->setCursor(QCursor(Qt::PointingHandCursor));
         pushButton_pause->setStyleSheet(QStringLiteral("QPushButton{border:0px}"));
-        QIcon icon1;
-        icon1.addFile(QStringLiteral(":/Images/Pause.png"), QSize(), QIcon::Normal, QIcon::Off);
-        pushButton_pause->setIcon(icon1);
+        QIcon icon2;
+        icon2.addFile(QStringLiteral(":/Images/Pause.png"), QSize(), QIcon::Normal, QIcon::Off);
+        pushButton_pause->setIcon(icon2);
         pushButton_pause->setIconSize(QSize(40, 40));
         pushButton_next = new QPushButton(centralwidget);
         pushButton_next->setObjectName(QStringLiteral("pushButton_next"));
         pushButton_next->setGeometry(QRect(100, 510, 40, 30));
-        pushButton_next->setCursor(QCursor(Qt::ArrowCursor));
+        pushButton_next->setCursor(QCursor(Qt::PointingHandCursor));
         pushButton_next->setStyleSheet(QStringLiteral("QPushButton{border:0px}"));
-        QIcon icon2;
-        icon2.addFile(QStringLiteral(":/Images/next.png"), QSize(), QIcon::Normal, QIcon::Off);
-        pushButton_next->setIcon(icon2);
+        QIcon icon3;
+        icon3.addFile(QStringLiteral(":/Images/next.png"), QSize(), QIcon::Normal, QIcon::Off);
+        pushButton_next->setIcon(icon3);
         pushButton_next->setIconSize(QSize(35, 30));
         pushButton_previous = new QPushButton(centralwidget);
         pushButton_previous->setObjectName(QStringLiteral("pushButton_previous"));
         pushButton_previous->setGeometry(QRect(10, 510, 40, 30));
-        pushButton_previous->setCursor(QCursor(Qt::ArrowCursor));
+        pushButton_previous->setCursor(QCursor(Qt::PointingHandCursor));
         pushButton_previous->setStyleSheet(QLatin1String("QPushButton\n"
 "{\n"
 "	border:0px;\n"
 "}"));
-        QIcon icon3;
-        icon3.addFile(QStringLiteral(":/Images/Previous.png"), QSize(), QIcon::Normal, QIcon::Off);
-        pushButton_previous->setIcon(icon3);
+        QIcon icon4;
+        icon4.addFile(QStringLiteral(":/Images/Previous.png"), QSize(), QIcon::Normal, QIcon::Off);
+        pushButton_previous->setIcon(icon4);
         pushButton_previous->setIconSize(QSize(35, 40));
         pushButton_randomMode = new QPushButton(centralwidget);
         pushButton_randomMode->setObjectName(QStringLiteral("pushButton_randomMode"));
         pushButton_randomMode->setGeometry(QRect(680, 510, 30, 30));
+        pushButton_randomMode->setCursor(QCursor(Qt::PointingHandCursor));
         pushButton_randomMode->setStyleSheet(QLatin1String("QPushButton\n"
 "{\n"
 "	border:0px;\n"
 "}"));
-        QIcon icon4;
-        icon4.addFile(QStringLiteral(":/Images/Random.png"), QSize(), QIcon::Normal, QIcon::Off);
-        pushButton_randomMode->setIcon(icon4);
+        QIcon icon5;
+        icon5.addFile(QStringLiteral(":/Images/Random.png"), QSize(), QIcon::Normal, QIcon::Off);
+        pushButton_randomMode->setIcon(icon5);
         pushButton_randomMode->setIconSize(QSize(30, 30));
         pushButton_loopMode = new QPushButton(centralwidget);
         pushButton_loopMode->setObjectName(QStringLiteral("pushButton_loopMode"));
         pushButton_loopMode->setGeometry(QRect(680, 510, 30, 30));
+        pushButton_loopMode->setCursor(QCursor(Qt::PointingHandCursor));
         pushButton_loopMode->setStyleSheet(QStringLiteral("QPushButton{border:0px;}"));
-        QIcon icon5;
-        icon5.addFile(QStringLiteral(":/Images/Loop.png"), QSize(), QIcon::Normal, QIcon::Off);
-        pushButton_loopMode->setIcon(icon5);
+        QIcon icon6;
+        icon6.addFile(QStringLiteral(":/Images/Loop.png"), QSize(), QIcon::Normal, QIcon::Off);
+        pushButton_loopMode->setIcon(icon6);
         pushButton_loopMode->setIconSize(QSize(30, 30));
         pushButton_loop1Song = new QPushButton(centralwidget);
         pushButton_loop1Song->setObjectName(QStringLiteral("pushButton_loop1Song"));
         pushButton_loop1Song->setGeometry(QRect(680, 510, 30, 30));
+        pushButton_loop1Song->setCursor(QCursor(Qt::PointingHandCursor));
         pushButton_loop1Song->setStyleSheet(QStringLiteral("QPushButton{border:0px;}"));
-        QIcon icon6;
-        icon6.addFile(QStringLiteral(":/Images/Loop1Song.png"), QSize(), QIcon::Normal, QIcon::Off);
-        pushButton_loop1Song->setIcon(icon6);
+        QIcon icon7;
+        icon7.addFile(QStringLiteral(":/Images/Loop1Song.png"), QSize(), QIcon::Normal, QIcon::Off);
+        pushButton_loop1Song->setIcon(icon7);
         pushButton_loop1Song->setIconSize(QSize(30, 30));
         MainScene->setCentralWidget(centralwidget);
         pushButton_pause->raise();
