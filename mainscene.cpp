@@ -1,10 +1,8 @@
 #include "mainscene.h"
 #include "ui_mainscene.h"
-#include "addmusicwidget.h"
 #include "rapidjson/stringbuffer.h"
 #include "rapidjson/writer.h"
 #include "rapidjson/document.h"
-#include "hotkeys.h"
 
 #include <QFileDialog>
 #include <fstream>
@@ -29,6 +27,29 @@ MainScene::MainScene(QWidget *parent)
     //set fixed size
     this->setFixedSize(800, 570);
     
+    //init other stuff
+    this->InitElse();
+    
+    //load music
+    this->LoadMusic();
+    
+    //add it into old file path
+    if(this->titleAndPath.size() != 0)
+    {
+        oldFilePath = this->titleAndPath[this->titleAndPath.size()-1].second;
+    }
+    
+    //init connect
+    this->InitConnect();
+}
+
+MainScene::~MainScene()
+{
+    delete ui;
+}
+
+void MainScene::InitElse()
+{
     //init player
     this->playList = new QMediaPlaylist(this);
     player = new QMediaPlayer(this);
@@ -37,9 +58,6 @@ MainScene::MainScene(QWidget *parent)
     //init list widget
     this->listWidget = new MyListWidget(this);
     this->listWidget->setGeometry(0, 60, 260, 460);
-    
-    //load music
-    this->LoadMusic();
     
     //set hot keys for Pause Button and Resume Button
     ui->pushButton_pause->setShortcut(QKeySequence("Space"));
@@ -57,8 +75,17 @@ MainScene::MainScene(QWidget *parent)
     //init pause and resume button
     ui->pushButton_pause->hide();
     
+    //set playback mode
+    this->playList->setPlaybackMode(QMediaPlaylist::Loop);
     
-    
+    //init setting scene
+    this->settingScene = new Settings;
+    settingScene->setFixedSize(400, 300);
+    settingScene->setWindowTitle("Settings");
+}
+
+void MainScene::InitConnect()
+{
     //connect list widget
     connect(this->listWidget, &MyListWidget::clicked, this, &MainScene::ListWidgetClicked);
     
@@ -93,17 +120,6 @@ MainScene::MainScene(QWidget *parent)
         playList->setPlaybackMode(QMediaPlaylist::Loop);
     });
     
-    //add it into old file path
-    if(this->titleAndPath.size() != 0)
-    {
-        oldFilePath = this->titleAndPath[this->titleAndPath.size()-1].second;
-    }
-    
-    //set playback mode
-    this->playList->setPlaybackMode(QMediaPlaylist::Loop);
-    
-    
-    
     //click the button to add music
     connect(ui->pushButton_addMusic, &QPushButton::clicked, this, &MainScene::AddMusic);
     
@@ -130,120 +146,70 @@ MainScene::MainScene(QWidget *parent)
     connect(ui->pushButton_previous, &QPushButton::clicked, this, &MainScene::PreviousMusic);
     connect(ui->pushButton_next, &QPushButton::clicked, this, &MainScene::NextMusic);
     
-    
-    //    QString listWidgetStyle = "QScrollBar:vertical"
-    //                              "{"
-    //                              "width:8px;"
-    //                              "background-color:transparent;"
-    //                              "margin:0px,0px,0px,0px;"
-    //                              " padding-top:12px;   /*上预留位置*/"
-    //                              " padding-bottom:12px;    /*下预留位置*/"
-    //                              "}"
-    
-    
-    //                              "QScrollBar::handle:vertical"
-    //                              " {"
-    //                              "     width:8px;"
-    //                              "     background-color:rgba(255,255,255,0.2);"
-    //                              "     border-radius:4px;"
-    //                              "     min-height:20px;"
-    //                              " }"
-    
-    
-    //                              "QScrollBar::handle:vertical:hover"
-    //                              "{"
-    //                              "    width:9px;"
-    //                              "    background-color:rgba(255,255,255,0.5);"
-    //                              "    border-radius:4px;"
-    //                              "    min-height:20;"
-    //                              "}"
-    
-    //                              "QScrollBar::add-line:vertical"
-    //                              "{"
-    //                              "     height:12px;"
-    //                              "     width:10px;"
-    //                              "     border-image:url(:/selectfile/scroll/3.png);"
-    //                              "     subcontrol-position:bottom;"
-    //                              "}"
-    
-    //                              "QScrollBar::sub-line:vertical"
-    //                              "{"
-    //                              "     height:12px;"
-    //                              "     width:10px;"
-    //                              "     border-image:url(:/selectfile/scroll/1.png);"
-    //                              "     subcontrol-position:top;"
-    //                              "}"
-    //                              "QScrollBar::add-line:vertical:hover"
-    //                              "{"
-    //                              "     height:12px;"
-    //                              "     width:10px;"
-    //                              "     border-image:url(:/selectfile/scroll/4.png);"
-    //                              "     subcontrol-position:bottom;"
-    //                              " }"
-    
-    
-    //                              " QScrollBar::sub-line:vertical:hover"
-    //                              " {"
-    //                              "     height:12px;"
-    //                              "     width:10px;"
-    //                              "     border-image:url(:/selectfile/scroll/2.png);"
-    //                              "     subcontrol-position:top;"
-    //                              " }"
-    
-    //                              " QScrollBar::add-page:vertical,"
-    //                              "QScrollBar::sub-page:vertical"
-    //                              " {"
-    //                              "     background-color:transparent;"
-    //                              "     border-radius:4px;"
-    //                              "}";
-    
-    //    ui->listWidget->setStyleSheet(listWidgetStyle);
-    
     //connect add music button in the menu bar
     connect(ui->actionAdd_Music, &QAction::triggered, this, &MainScene::AddMusic);
     
-    HotKeys *hotKeysScene = new HotKeys;
-    hotKeysScene->resize(300, 200);
-    hotKeysScene->setWindowTitle("Hot Keys");
-    
     //connect hot keys action
-    connect(ui->actionHotKeys, &QAction::triggered, hotKeysScene, &HotKeys::show);
-}
-
-MainScene::~MainScene()
-{
-    delete ui;
+    connect(ui->actionHotKeys, &QAction::triggered, this->settingScene, &Settings::show);
+    connect(this->settingScene, &Settings::FinishedSetting, this, &MainScene::CopyAllFiles);
 }
 
 void MainScene::AddMusic()
 {    
-    AddMusicWidget *addMusicWidget = new AddMusicWidget;
-    addMusicWidget->show();
+    //    AddMusicWidget *addMusicWidget = new AddMusicWidget;
+    //    addMusicWidget->show();
     
-    //put path into play list
-    connect(addMusicWidget, &AddMusicWidget::FinishedAddingMusic, [=]()
+    //    //put path into play list
+    //    connect(addMusicWidget, &AddMusicWidget::FinishedAddingMusic, [=]()
+    //    {
+    //        qDebug() << "file path =" << addMusicWidget->filePath;
+    //        qDebug() << "title =" << addMusicWidget->title;
+    
+    //        QString realTitle = addMusicWidget->title;
+    
+    //        if(addMusicWidget->artist != "")
+    //        {
+    //            realTitle += " - ";
+    //            realTitle += addMusicWidget->artist;
+    //        }
+    
+    //        //add media and list widget
+    //        this->playList->addMedia(QUrl::fromLocalFile(addMusicWidget->filePath));
+    //        QListWidgetItem *item = new QListWidgetItem(realTitle);
+    //        this->listWidget->addItem(item);
+    
+    //        //add this filepath to the container
+    //        titleAndPath.push_back(qMakePair(realTitle, addMusicWidget->filePath));
+    
+    //        //save the music into json file
+    //        this->SaveMusic();
+    
+    //        //delete the addMusicWidget
+    //        delete addMusicWidget;
+    //    });
+    
+    QStringList songFileList = QFileDialog::getOpenFileNames(this, 
+                                                             "Choose Your Favorite Music Right Here...", 
+                                                             oldFilePath, 
+                                                             "Music Format(*.mp3)");
+    
+    qDebug() << songFileList;
+    
+    for(auto it = songFileList.begin(); it != songFileList.end(); it++)
     {
-        qDebug() << "file path =" << addMusicWidget->filePath;
-        qDebug() << "title =" << addMusicWidget->title;
+        QFileInfo info = *it;
+        QString title = info.fileName();
         
-        QString realTitle = addMusicWidget->title;
-        realTitle += " - ";
-        realTitle += addMusicWidget->artist;
+        int position = title.indexOf(".mp3");
+        title.remove(position, 4);
+        qDebug() << title;
         
-        //add media and list widget
-        this->playList->addMedia(QUrl::fromLocalFile(addMusicWidget->filePath));
-        QListWidgetItem *item = new QListWidgetItem(realTitle);
-        this->listWidget->addItem(item);
-        
-        //add this filepath to the container
-        titleAndPath.push_back(qMakePair(realTitle, addMusicWidget->filePath));
-        
-        //save the music into json file
-        this->SaveMusic();
-        
-        //delete the addMusicWidget
-        delete addMusicWidget;
-    });
+        this->titleAndPath.push_back(qMakePair(title, *it));
+        this->listWidget->addItem(title);
+        this->playList->addMedia(QUrl::fromLocalFile(*it));
+    }
+    
+    this->SaveMusic();
 }
 
 void MainScene::SaveMusic()
@@ -255,23 +221,14 @@ void MainScene::SaveMusic()
     writer.Key("music");
     writer.StartArray();
     
+    qDebug() << "-------------------------start saving stuff...-------------------------";
+    
     for(auto it = this->titleAndPath.begin(); it != this->titleAndPath.end(); it++)
     {
         writer.StartObject();
         
-        int pos = it->first.indexOf('-');
-        
-        QString title = it->first.mid(0, pos - 1);
-        qDebug() << title;
-        
-        QString artist = it->first.mid(pos + 2, it->first.size());
-        qDebug() << artist;
-        
         writer.Key("title");
-        writer.String(title.toUtf8().data());
-        
-        writer.Key("artist");
-        writer.String(artist.toUtf8().data());
+        writer.String(it->first.toUtf8().data());
         
         writer.Key("path");
         writer.String(it->second.toUtf8().data());
@@ -288,6 +245,8 @@ void MainScene::SaveMusic()
     ofstream ofs(FILENAME, ios::out);
     ofs << data.toUtf8().data();
     ofs.close();   
+    
+    qDebug() << "-------------------------Ended saving stuff...-------------------------";
 }
 
 void MainScene::PlayMusic()
@@ -331,21 +290,10 @@ void MainScene::LoadMusic()
                     const char *title = "";
                     const char *path = "";
                     
-                    QString realTitle;
-                    
                     if(object.HasMember("title") && object["title"].IsString())
                     {
                         title = object["title"].GetString();
-                        realTitle = title;
                         qDebug() << object["title"].GetString();
-                    }
-                    
-                    if(object.HasMember("artist") && object["artist"].IsString())
-                    {
-                        realTitle += " - ";
-                        title = object["artist"].GetString();
-                        realTitle += title;
-                        qDebug() << realTitle;
                     }
                     
                     if(object.HasMember("path") && object["path"].IsString())
@@ -354,7 +302,7 @@ void MainScene::LoadMusic()
                         qDebug() << object["path"].GetString();
                     }
                     
-                    titleAndPath.push_back(qMakePair(realTitle, (QString)path));
+                    titleAndPath.push_back(qMakePair((QString)title, (QString)path));
                     qDebug() << "first =" << titleAndPath[i].first;
                     qDebug() << "second =" << titleAndPath[i].second;
                 }
@@ -449,37 +397,61 @@ void MainScene::EditMusic(int row)
 {
     qDebug() << "title:" << this->titleAndPath[row].first.toUtf8().data() << "path:" << this->titleAndPath[row].second.toUtf8().data();
     
-    AddMusicWidget *addMusicWidget = new AddMusicWidget;
-    addMusicWidget->show();
-    addMusicWidget->SetTitle(this->titleAndPath[row].first);
-    addMusicWidget->SetPath(this->titleAndPath[row].second);
+    //    AddMusicWidget *addMusicWidget = new AddMusicWidget;
+    //    addMusicWidget->show();
+    //    addMusicWidget->SetTitle(this->titleAndPath[row].first);
+    //    addMusicWidget->SetPath(this->titleAndPath[row].second);
     
-    //put path into play list
-    connect(addMusicWidget, &AddMusicWidget::FinishedAddingMusic, [=]()
-    {
-        qDebug() << "file path =" << addMusicWidget->filePath;
-        qDebug() << "title =" << addMusicWidget->title;
-        
-        //add media and list widget
-        this->playList->insertMedia(row, QUrl::fromLocalFile(addMusicWidget->filePath));
-        QListWidgetItem *item = new QListWidgetItem(addMusicWidget->title);
-        this->listWidget->insertItem(row, item);
-        
-        //add this filepath to the container
-        titleAndPath.insert(row, qMakePair(addMusicWidget->title, addMusicWidget->filePath));
-        
-        //delete the old one
-        DeleteMusic(row+1);
-        
-        //save the music into json file
-        this->SaveMusic();
-        
-        //delete the addMusicWidget
-        delete addMusicWidget;
-        
-        this->playList->setCurrentIndex(row);
-        this->listWidget->setCurrentRow(row);
-    });
+    //    //put path into play list
+    //    connect(addMusicWidget, &AddMusicWidget::FinishedAddingMusic, [=]()
+    //    {
+    //        qDebug() << "file path =" << addMusicWidget->filePath;
+    //        qDebug() << "title =" << addMusicWidget->title;
+    
+    //        //add media and list widget
+    //        this->playList->insertMedia(row, QUrl::fromLocalFile(addMusicWidget->filePath));
+    //        QListWidgetItem *item = new QListWidgetItem(addMusicWidget->title);
+    //        this->listWidget->insertItem(row, item);
+    
+    //        //add this filepath to the container
+    //        titleAndPath.insert(row, qMakePair(addMusicWidget->title, addMusicWidget->filePath));
+    
+    //        //delete the old one
+    //        DeleteMusic(row+1);
+    
+    //        //save the music into json file
+    //        this->SaveMusic();
+    
+    //        //delete the addMusicWidget
+    //        delete addMusicWidget;
+    
+    //        this->playList->setCurrentIndex(row);
+    //        this->listWidget->setCurrentRow(row);
+    //    });
+    
+    QString newDir = QFileDialog::getOpenFileName(this, 
+                                                  "Choose Your Favorite Music Right Here...", 
+                                                  oldFilePath, 
+                                                  "Music Format(*.mp3)");
+    
+    qDebug() << newDir;
+    if(newDir == "")
+        return;
+    
+    QFileInfo info = newDir;
+    QString fileName = info.fileName();
+    fileName.replace(".mp3", "");
+    qDebug() << fileName;
+    
+    //delete the old one
+    DeleteMusic(row);
+    
+    //insert the new one
+    this->titleAndPath.push_back(qMakePair(fileName, newDir));
+    this->listWidget->addItem(fileName);
+    this->playList->addMedia(QUrl::fromLocalFile(newDir));
+    
+    this->SaveMusic();
 }
 
 void MainScene::PauseMusic()
@@ -509,4 +481,33 @@ void MainScene::NextMusic()
     
     this->playList->setCurrentIndex(currentRow);
     this->listWidget->setCurrentRow(currentRow);
+}
+
+void MainScene::CopyAllFiles()
+{
+    for(auto it = this->titleAndPath.begin(); it != this->titleAndPath.end(); it++)
+    {
+        qDebug() << qApp->applicationDirPath();
+        
+        QDir dir = QString(qApp->applicationDirPath());
+        dir.mkdir("Music");
+        bool isCopySuccessful = QFile::copy(
+                    it->second, 
+                    QString("%1%2%3").arg(qApp->applicationDirPath()).arg("/Music/").arg(it->first + ".mp3")
+                    );
+        
+        qDebug() << QString("%1%2%3").arg(qApp->applicationDirPath()).arg("/Music/").arg(it->first + ".mp3");
+        qDebug() << "copied successful:" << isCopySuccessful;
+        
+        it->second = QString("%1%2%3").arg(qApp->applicationDirPath()).arg("/Music/").arg(it->first + ".mp3");
+    }
+    
+    this->SaveMusic();
+    
+    //    QDir dir = (QString)"D:\\";
+    //    dir.mkdir("Music");
+    
+    //    qDebug() << "Start Copying Files...";
+    //    bool isCopySuccessful = QFile::copy("D:\\4. My Working Stuff\\99. Convert\\The Calling - TheFatRat.mp3", "D:\\Music\\Test01.mp3");
+    //    qDebug() << isCopySuccessful;
 }

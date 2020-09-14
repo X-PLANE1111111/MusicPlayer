@@ -2,6 +2,7 @@
 #define MAINSCENE_H
 
 #include "mylistwidget.h"
+#include "settings.h"
 
 #include <QMainWindow>
 #include <QMediaPlaylist>
@@ -31,6 +32,18 @@ private:
     
     //the player
     QMediaPlayer *player = nullptr;
+    
+    //setting scene
+    Settings *settingScene = nullptr;
+    
+    //init ui
+    void InitElse();
+    
+    //init connect
+    void InitConnect();
+    
+    //show hot key scene
+    void ShowHotKeyScene();
     
     //the function that will add music
     void AddMusic();
@@ -73,6 +86,9 @@ private:
     
     //next music
     void NextMusic();
+    
+    //copy file
+    void CopyAllFiles();
     
     //the container that saves title and path
     QVector<QPair<QString, QString>>titleAndPath; 

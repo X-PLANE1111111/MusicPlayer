@@ -429,7 +429,7 @@ QPushButton:hover
   </action>
   <action name="actionHotKeys">
    <property name="text">
-    <string>Hot Keys</string>
+    <string>Settings</string>
    </property>
   </action>
  </widget>

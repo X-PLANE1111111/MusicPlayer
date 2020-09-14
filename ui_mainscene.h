@@ -241,7 +241,7 @@ public:
     {
         MainScene->setWindowTitle(QApplication::translate("MainScene", "MainScene", Q_NULLPTR));
         actionAdd_Music->setText(QApplication::translate("MainScene", "Add Music", Q_NULLPTR));
-        actionHotKeys->setText(QApplication::translate("MainScene", "Hot Keys", Q_NULLPTR));
+        actionHotKeys->setText(QApplication::translate("MainScene", "Settings", Q_NULLPTR));
         pushButton_addMusic->setText(QApplication::translate("MainScene", "Add Music", Q_NULLPTR));
 #ifndef QT_NO_TOOLTIP
         pushButton_pauseMusic->setToolTip(QApplication::translate("MainScene", "Resume", Q_NULLPTR));

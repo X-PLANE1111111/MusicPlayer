@@ -16,22 +16,19 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    addmusicwidget.cpp \
-    hotkeys.cpp \
     main.cpp \
     mainscene.cpp \
-    mylistwidget.cpp
+    mylistwidget.cpp \
+    settings.cpp
 
 HEADERS += \
-    addmusicwidget.h \
-    hotkeys.h \
     mainscene.h \
-    mylistwidget.h
+    mylistwidget.h \
+    settings.h
 
 FORMS += \
-    addmusicwidget.ui \
-    hotkeys.ui \
-    mainscene.ui
+    mainscene.ui \
+    settings.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

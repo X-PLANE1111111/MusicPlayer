@@ -30,10 +30,8 @@ class Ui_AddMusicWidget
 public:
     QVBoxLayout *verticalLayout;
     QLabel *label;
-    QLabel *label_noTitle;
     QLineEdit *lineEdit_title;
     QLabel *label_3;
-    QLabel *label_noArtist;
     QLineEdit *lineEdit_artist;
     QLabel *label_2;
     QLabel *label_noPath;
@@ -62,11 +60,6 @@ public:
 
         verticalLayout->addWidget(label);
 
-        label_noTitle = new QLabel(AddMusicWidget);
-        label_noTitle->setObjectName(QStringLiteral("label_noTitle"));
-
-        verticalLayout->addWidget(label_noTitle);
-
         lineEdit_title = new QLineEdit(AddMusicWidget);
         lineEdit_title->setObjectName(QStringLiteral("lineEdit_title"));
         QFont font;
@@ -81,11 +74,6 @@ public:
         label_3->setAlignment(Qt::AlignCenter);
 
         verticalLayout->addWidget(label_3);
-
-        label_noArtist = new QLabel(AddMusicWidget);
-        label_noArtist->setObjectName(QStringLiteral("label_noArtist"));
-
-        verticalLayout->addWidget(label_noArtist);
 
         lineEdit_artist = new QLineEdit(AddMusicWidget);
         lineEdit_artist->setObjectName(QStringLiteral("lineEdit_artist"));
@@ -183,10 +171,8 @@ public:
     void retranslateUi(QWidget *AddMusicWidget)
     {
         AddMusicWidget->setWindowTitle(QApplication::translate("AddMusicWidget", "Form", Q_NULLPTR));
-        label->setText(QApplication::translate("AddMusicWidget", "Song Name", Q_NULLPTR));
-        label_noTitle->setText(QApplication::translate("AddMusicWidget", "Song Name cannot be none!", Q_NULLPTR));
-        label_3->setText(QApplication::translate("AddMusicWidget", "Artist", Q_NULLPTR));
-        label_noArtist->setText(QApplication::translate("AddMusicWidget", "Artist cannot be none", Q_NULLPTR));
+        label->setText(QApplication::translate("AddMusicWidget", "Song Name (Optional)", Q_NULLPTR));
+        label_3->setText(QApplication::translate("AddMusicWidget", "Artist (Optional)", Q_NULLPTR));
         label_2->setText(QApplication::translate("AddMusicWidget", "Music Path", Q_NULLPTR));
         label_noPath->setText(QApplication::translate("AddMusicWidget", "music path cannot be none!", Q_NULLPTR));
         pushButton_openFileDialog->setText(QApplication::translate("AddMusicWidget", "Open Directionary", Q_NULLPTR));
